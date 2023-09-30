@@ -22,6 +22,9 @@ MonoBehaviour:
   flashDuration: 0.2
   velocity: 1
   lootDrop:
-  - lootObject: {fileID: 6795371867755946945, guid: a9399be2df5979747bf843a6f2b09dac, type: 3}
-    probability: 1
-    points: 10
+  - lootObject: {fileID: 11400000, guid: 805e5e66b2753354184508eb107fa700, type: 2}
+    probability: 0.6
+  - lootObject: {fileID: 11400000, guid: 23a155ae22fb85845a7cb62f3b80239e, type: 2}
+    probability: 0.3
+  - lootObject: {fileID: 11400000, guid: c5be6c22a8fb58b40acf078e3d19fb68, type: 2}
+    probability: 0.1

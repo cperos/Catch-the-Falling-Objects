@@ -30,10 +30,47 @@ public class PipeBehaviour : MonoBehaviour
 
     private void SpawnObject(int itemNumber)
     {
+        LootSO lootSO = _pipeSO.lootDrop[itemNumber].lootObject;
         Debug.Log($"Spawning Item number {itemNumber}");
-        GameObject loot = Instantiate(_pipeSO.lootDrop[itemNumber].lootObject, transform.localPosition, Quaternion.identity);
-        Destroy(loot, 3f);
+        // Create a new game object
+        GameObject lootObject = new GameObject(lootSO.name);
+        lootObject.AddComponent<SpriteRenderer>();
+        lootObject.AddComponent<Rigidbody2D>();
+        lootObject.transform.localPosition = transform.localPosition;
+        LootManager lootManger = lootObject.AddComponent<LootManager>();
+        lootManger.Init(lootSO);
+
+        // Attach the SpawnPipeManager script to the game object
+        //GameObject loot = Instantiate(_pipeSO.lootDrop[itemNumber].lootObject, transform.localPosition, Quaternion.identity);
+        Destroy(lootObject, lootSO.timeToLive);
     }
+
+
+
+    public int GetRandomLootIndex(List<LootToDrop> lootList)
+    {
+        // Compute the Total Weight
+        float totalProbability = 0f;
+        foreach (LootToDrop loot in lootList)
+        {
+            totalProbability += loot.probability;
+        }
+
+        // Pick a Random Value
+        float randomValue = Random.Range(0f, totalProbability);
+
+        // Determine the Selected Item's index
+        for (int i = 0; i < lootList.Count; i++)
+        {
+            if (randomValue <= lootList[i].probability)
+                return i;
+            randomValue -= lootList[i].probability;
+        }
+
+        // This shouldn't happen if probabilities are set correctly
+        throw new System.Exception("Failed to select a valid loot index, Check probabilities.");
+    }
+
 
     private void setFlashColor()
     {
@@ -52,6 +89,7 @@ public class PipeBehaviour : MonoBehaviour
 
     private IEnumerator FlashAndSpawnRoutine()
     {
+        _elapsedTime = 0f;
         interval = Random.Range(_pipeSO.spawnTimeRangeMinMax.x, _pipeSO.spawnTimeRangeMinMax.y);
         //Fade into warning color
         while (_elapsedTime < interval)
@@ -69,8 +107,12 @@ public class PipeBehaviour : MonoBehaviour
 
         // Set to flash color
         setFlashColor();
-        
-        SpawnObject(Random.Range(0, _pipeSO.lootDrop.Count));
+
+        // set a lootIndex
+        int lootIndex = GetRandomLootIndex(_pipeSO.lootDrop);
+
+        // spawn the loot of that IndexNumber
+        SpawnObject(lootIndex);
         
 
 
@@ -82,11 +124,7 @@ public class PipeBehaviour : MonoBehaviour
         // If still active, start process over again
         if (_isActive) 
         {
-            _elapsedTime = 0f;
             StartCoroutine(FlashAndSpawnRoutine());
         }
     }
-
-
-
-    }
+}

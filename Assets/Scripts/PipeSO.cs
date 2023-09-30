@@ -25,18 +25,15 @@ public class PipeSO : ScriptableObject
     public float velocity;
 
     public List <LootToDrop> lootDrop = new List <LootToDrop>();
-    
-
-    // public Loot To Drop
-
 
 }
 
 [System.Serializable]
 public struct LootToDrop
 {
-    public GameObject lootObject;
+    public LootSO lootObject;
     public float probability;
-    public float points;
 }
+
+
 

@@ -20,4 +20,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37c8628dd060a534c821cdef767e4c72, type: 2}
   - {fileID: 11400000, guid: 9cc412e0a69529948ae91d5e27fe4b48, type: 2}
   - {fileID: 11400000, guid: 37c8628dd060a534c821cdef767e4c72, type: 2}
+  - {fileID: 11400000, guid: 37c8628dd060a534c821cdef767e4c72, type: 2}
+  - {fileID: 11400000, guid: 9cc412e0a69529948ae91d5e27fe4b48, type: 2}
   spawnRateRange: {x: 1, y: 3}

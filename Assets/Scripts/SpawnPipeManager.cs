@@ -89,10 +89,5 @@ public class SpawnPipeManager : MonoBehaviour
             //pipeBehaviour.setPipeSO(_pipeSOs[i]);
 
         }
-
-        
     }
-
-
-
 }
