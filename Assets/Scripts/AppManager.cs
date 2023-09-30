@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class AppManager : MonoBehaviour
 {
-    public LevelManager levelManager;
-    public GameObject levelManagerObject;
+    private LevelManager levelManager;
+    private GameObject levelManagerObject;
     public List <LevelDataSO> levelDataSOList = new List<LevelDataSO>();
-    public UICanvasManager uiCanvasManager;
+    //public UICanvasManager uiCanvasManager;
 
 
     public bool gameActive;
