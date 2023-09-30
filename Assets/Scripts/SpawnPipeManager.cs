@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class SpawnPipeManager : MonoBehaviour
@@ -58,6 +59,8 @@ public class SpawnPipeManager : MonoBehaviour
         InitializeSpawnRange();
         SpawnPipes();
         DistributePipeObjects();
+        ActivatePipes();
+
     }
 
     public void SpawnPipes()
@@ -72,6 +75,18 @@ public class SpawnPipeManager : MonoBehaviour
             SpriteRenderer sr = pipe.GetComponent<SpriteRenderer>();
 
             sr.color = pipeSO.color;
+
+        }
+        
+    }
+
+    private void ActivatePipes()
+    {
+        foreach(GameObject pipeGO in _spawnPipes)
+        {
+            PipeBehaviour pipeBehaviour = pipeGO.GetComponent<PipeBehaviour>();
+            pipeBehaviour.Activate();
+
 
         }
         
