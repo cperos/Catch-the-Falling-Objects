@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
 
-public class PipeBehaviour : MonoBehaviour
+public class Pipe : MonoBehaviour
 {
 
     [SerializeField] private float _elapsedTime;  // TODO: randomize range
@@ -13,14 +12,21 @@ public class PipeBehaviour : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
 
-    public void Activate(PipeSO pipeSO)
+    public void Activate()
     {
-        _pipeSO = pipeSO;
-        setMainColor();
+
+
         // Calls SpawnObject after 5 seconds
         //Invoke("SpawnObject", countdown);
         StartCoroutine(FlashAndSpawnRoutine());
         _isActive = true;
+    }
+
+    public void Init(PipeSO pipeSO)
+    {
+        _pipeSO = pipeSO;
+        setMainColor();
+        gameObject.AddComponent<SpriteRenderer>();
     }
 
     public void Deactivate()
@@ -37,8 +43,8 @@ public class PipeBehaviour : MonoBehaviour
         lootObject.AddComponent<SpriteRenderer>();
         lootObject.AddComponent<Rigidbody2D>();
         lootObject.transform.localPosition = transform.localPosition;
-        LootManager lootManger = lootObject.AddComponent<LootManager>();
-        lootManger.Init(lootSO);
+        LootManager lootManager = lootObject.AddComponent<LootManager>();
+        lootManager.Init(lootSO);
 
         // Attach the SpawnPipeManager script to the game object
         //GameObject loot = Instantiate(_pipeSO.lootDrop[itemNumber].lootObject, transform.localPosition, Quaternion.identity);
@@ -74,16 +80,24 @@ public class PipeBehaviour : MonoBehaviour
 
     private void setFlashColor()
     {
-        setColor(_pipeSO.flashColor);
+        if (_pipeSO.flashColor != null)
+        {
+            setColor(_pipeSO.flashColor);
+        }
+
     }
 
     public void setMainColor()
     {
-        setColor(_pipeSO.mainColor);
+        if (_pipeSO.mainColor != null)
+        {
+            setColor(_pipeSO.mainColor);
+        }
     }
 
     private void setColor(Color color)
     {
+        
         _spriteRenderer.color = color;
     }
 

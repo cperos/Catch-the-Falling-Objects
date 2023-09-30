@@ -69,11 +69,18 @@ public class SpawnPipeManager : MonoBehaviour
         foreach (PipeSO pipeSO in _pipeSOs)
         {
             
-            GameObject pipe = Instantiate(pipeSO.spawnPipePrefab);
+            //GameObject pipe = Instantiate(pipeSO.spawnPipePrefab);
+            
+            GameObject pipe = new GameObject(pipeSO.name);
+
+            Pipe pipeBehaviour = pipe.AddComponent<Pipe>();
+
+            pipeBehaviour.Init(pipeSO);
+ 
+
             _spawnPipes.Add(pipe);
 
-            SpriteRenderer sr = pipe.GetComponent<SpriteRenderer>();
-            sr.color = pipeSO.mainColor;
+
 
         }
         
@@ -84,8 +91,8 @@ public class SpawnPipeManager : MonoBehaviour
         //foreach(GameObject pipeGO in _spawnPipes)
         for (int i = 0; i < _spawnPipes.Count; i++)
         {
-            PipeBehaviour pipeBehaviour = _spawnPipes[i].GetComponent<PipeBehaviour>();;
-            pipeBehaviour.Activate(_pipeSOs[i]);
+            Pipe pipeBehaviour = _spawnPipes[i].GetComponent<Pipe>();;
+            pipeBehaviour.Activate();
             //pipeBehaviour.setPipeSO(_pipeSOs[i]);
 
         }

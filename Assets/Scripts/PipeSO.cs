@@ -13,6 +13,7 @@ public class PipeSO : ScriptableObject
 {
     public GameObject spawnPipePrefab;
 
+    public Sprite sprite;
     public string nameOfSpawnPipeType;
     
     public Color mainColor;
