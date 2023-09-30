@@ -14,13 +14,29 @@ public class PipeSO : ScriptableObject
     public GameObject spawnPipePrefab;
 
     public string nameOfSpawnPipeType;
-    public Color color;
+    
+    public Color mainColor;
+    public Color warningColor;
     public Color flashColor;
-    public float fashTime;
+
+    public Vector2 spawnTimeRangeMinMax;  //Min/Max time before next drop
+    public float warningDuration;
+    public float flashDuration;
     public float velocity;
 
+    public List <LootToDrop> lootDrop = new List <LootToDrop>();
+    
 
     // public Loot To Drop
 
 
 }
+
+[System.Serializable]
+public struct LootToDrop
+{
+    public GameObject lootObject;
+    public float probability;
+    public float points;
+}
+
