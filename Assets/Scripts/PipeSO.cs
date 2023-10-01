@@ -11,9 +11,10 @@ using UnityEngine.UI;
 /// </summary>
 public class PipeSO : ScriptableObject
 {
-    public GameObject spawnPipePrefab;
-
     public Sprite sprite;
+    public Vector2 scale = new Vector2 (1f,1f);
+    public float rotation = 0f;
+
     public string nameOfSpawnPipeType;
     
     public Color mainColor;

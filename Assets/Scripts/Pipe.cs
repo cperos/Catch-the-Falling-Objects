@@ -25,8 +25,11 @@ public class Pipe : MonoBehaviour
     public void Init(PipeSO pipeSO)
     {
         _pipeSO = pipeSO;
-        setMainColor();
-        gameObject.AddComponent<SpriteRenderer>();
+        _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        _spriteRenderer.color = _pipeSO.mainColor;
+        _spriteRenderer.sprite = _pipeSO.sprite;
+        transform.localScale = new Vector3(_pipeSO.scale.x, _pipeSO.scale.y, 1f);
+        transform.eulerAngles = new Vector3(0, 0, _pipeSO.rotation);
     }
 
     public void Deactivate()
@@ -40,17 +43,14 @@ public class Pipe : MonoBehaviour
         Debug.Log($"Spawning Item number {itemNumber}");
         // Create a new game object
         GameObject lootObject = new GameObject(lootSO.name);
-        lootObject.AddComponent<SpriteRenderer>();
-        lootObject.AddComponent<Rigidbody2D>();
         lootObject.transform.localPosition = transform.localPosition;
-        LootManager lootManager = lootObject.AddComponent<LootManager>();
+        Loot lootManager = lootObject.AddComponent<Loot>();
         lootManager.Init(lootSO);
 
         // Attach the SpawnPipeManager script to the game object
         //GameObject loot = Instantiate(_pipeSO.lootDrop[itemNumber].lootObject, transform.localPosition, Quaternion.identity);
         Destroy(lootObject, lootSO.timeToLive);
     }
-
 
 
     public int GetRandomLootIndex(List<LootToDrop> lootList)
@@ -77,30 +77,6 @@ public class Pipe : MonoBehaviour
         throw new System.Exception("Failed to select a valid loot index, Check probabilities.");
     }
 
-
-    private void setFlashColor()
-    {
-        if (_pipeSO.flashColor != null)
-        {
-            setColor(_pipeSO.flashColor);
-        }
-
-    }
-
-    public void setMainColor()
-    {
-        if (_pipeSO.mainColor != null)
-        {
-            setColor(_pipeSO.mainColor);
-        }
-    }
-
-    private void setColor(Color color)
-    {
-        
-        _spriteRenderer.color = color;
-    }
-
     private IEnumerator FlashAndSpawnRoutine()
     {
         _elapsedTime = 0f;
@@ -120,7 +96,7 @@ public class Pipe : MonoBehaviour
 
 
         // Set to flash color
-        setFlashColor();
+        _spriteRenderer.color = _pipeSO.flashColor;
 
         // set a lootIndex
         int lootIndex = GetRandomLootIndex(_pipeSO.lootDrop);
@@ -132,13 +108,17 @@ public class Pipe : MonoBehaviour
 
         yield return new WaitForSeconds(_pipeSO.flashDuration);
 
-        // Reset to original color
-        setMainColor();
+        ResetColor();
 
         // If still active, start process over again
         if (_isActive) 
         {
             StartCoroutine(FlashAndSpawnRoutine());
         }
+    }
+
+    public void ResetColor()
+    {
+        _spriteRenderer.color = _pipeSO.mainColor;
     }
 }

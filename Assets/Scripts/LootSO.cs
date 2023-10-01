@@ -14,5 +14,5 @@ public class LootSO : ScriptableObject
     public float mass;
     public float timeToLive;
 
-    public Vector3 scale;
+    public Vector2 scale;
 }
