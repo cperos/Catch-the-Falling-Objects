@@ -15,9 +15,14 @@ MonoBehaviour:
   nameOfPlayer: Player 1
   sprite: {fileID: 21300000, guid: 30ebaebfc8f175640bfd5b14d6911de8, type: 3}
   mainColor: {r: 1, g: 1, b: 1, a: 1}
-  layer: 1
+  layer: 2
   playerScore: 0
+  playerHealth: 100
   mass: 1.5
   scale: {x: 0.5, y: 0.5}
   roatation: 0
-  speed: 10
+  speed: 15
+  drag: 6
+  colliderOffset: {x: 0, y: 0}
+  colliderSize: {x: 4, y: 0.5}
+  yShift: 1

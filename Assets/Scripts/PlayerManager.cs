@@ -1,35 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private List <PlayerSO> _playerSOs = new List <PlayerSO>();
+    [SerializeField] private List<GameObject> _players = new List<GameObject>();
 
     [SerializeField] private Vector3 _bottomLeftWorldPos;
     [SerializeField] private Vector3 _bottomRightWorldPos;
 
+    [SerializeField] private float yShiftAmount;
+
     public void Init(List<PlayerSO> playerSOs)
     {
-        InitializePlayerSpawnRange();
-        _playerSOs = playerSOs;
-        DistributePlayerObjects();
-    }
-
-    public void LoadPlayers()
-    {
-        foreach (PlayerSO playerSO in _playerSOs)
+        if (playerSOs.Count == 0) 
         {
-            LoadPlayer(playerSO);
+            Debug.LogWarning("No Players to Load");
+            return;
         }
+        _playerSOs = playerSOs;
+        CreateAllPlayers();
+        InitializePlayerSpawnRange();
+        DistributePlayerObjects();
+        
+
     }
 
-    public GameObject LoadPlayer(PlayerSO playerSO)
+    public void CreatePlayer(PlayerSO playerSO)
     {
+        yShiftAmount = playerSO.yShift;
         GameObject playerObject = new GameObject(playerSO.nameOfPlayer);
 
-        PlayerMovement playerMovement = (PlayerMovement)playerObject.AddComponent<PlayerMovement>();
-        playerMovement.speed = playerSO.speed;
+
+        Player playerMovement = (Player)playerObject.AddComponent<Player>();
+        playerMovement.Init(playerSO);
 
         SpriteRenderer spriteRenderer = (SpriteRenderer)playerObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = playerSO.sprite;
@@ -40,20 +45,29 @@ public class PlayerManager : MonoBehaviour
         playerObject.transform.localScale = new Vector3 (playerSO.scale.x, playerSO.scale.y, 1f);
         playerObject.transform.eulerAngles = new Vector3(0, 0, playerSO.roatation);
 
-        return playerObject;
+
+
+        _players.Add(playerObject);
 
     }
 
     private void DistributePlayerObjects()
     {
-        int objectCount = _playerSOs.Count;
+        int objectCount = _players.Count;
+
         for (int i = 0; i < objectCount; i++)
         {
-            float lerpValue = (float)i / (objectCount - 1);
+            float lerpValue = ((float)i + 1) / (objectCount + 1);
             Vector3 interpolatedPosition = Vector3.Lerp(_bottomLeftWorldPos, _bottomRightWorldPos, lerpValue);
+            _players[i].transform.position = interpolatedPosition;
+        }
+    }
 
-            GameObject playerObject = LoadPlayer(_playerSOs[i]);  // Assuming LoadPlayer now returns the GameObject it created.
-            playerObject.transform.localPosition = interpolatedPosition;
+    private void CreateAllPlayers()
+    {
+        foreach(PlayerSO playerSO in _playerSOs)
+        {
+            CreatePlayer(playerSO);
         }
     }
 
@@ -68,5 +82,11 @@ public class PlayerManager : MonoBehaviour
         _bottomRightWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, mainCamera.nearClipPlane));
 
         // Optionally, you can shift the positions left/right or up/down as necessary.
+        // Shift positions upward by x units
+        float xShiftAmount = 1.25f; // replace this with the amount you want to shift by
+        _bottomLeftWorldPos.y += yShiftAmount;
+        _bottomRightWorldPos.y += yShiftAmount;
+        _bottomLeftWorldPos.x += xShiftAmount;
+        _bottomRightWorldPos.x -= xShiftAmount;
     }
 }

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Blue Coin
   m_EditorClassIdentifier: 
   nameOfLoot: Blue Coin
+  behaviourHandler: {fileID: 1727724055089368656, guid: 5fa99b3e683d1f24f8562289781b8c27, type: 3}
   sprite: {fileID: 1815893739, guid: adf75be252382e5478e1b985c878aed1, type: 3}
+  layer: 1
   mainColor: {r: 0, g: 1, b: 1, a: 1}
-  score: 250
+  value: 50
   mass: 5
   timeToLive: 3
-  scale: {x: 0.75, y: 0.75, z: 0.75}
+  scale: {x: 0.75, y: 0.75}

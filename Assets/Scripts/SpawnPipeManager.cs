@@ -44,7 +44,7 @@ public class SpawnPipeManager : MonoBehaviour
         _topRightWorldPos = mainCamera.ScreenToWorldPoint(_topRightScreenPos);
 
         // Shift positions upward by x units
-        float yShiftAmount = 0f; // replace this with the amount you want to shift by
+        float yShiftAmount = -.5f; // replace this with the amount you want to shift by
         float xShiftAmount = 1.25f; // replace this with the amount you want to shift by
         _topLeftWorldPos.y += yShiftAmount;
         _topRightWorldPos.y += yShiftAmount;

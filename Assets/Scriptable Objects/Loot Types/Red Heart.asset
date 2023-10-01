@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Red Heart
   m_EditorClassIdentifier: 
   nameOfLoot: Red Heart
+  behaviourHandler: {fileID: 1727724055089368656, guid: c30c26b1a889dcc4d8fc1ccbeb2200cc, type: 3}
   sprite: {fileID: 19381053, guid: f17388a668d6a9d4ebd6d5a45e5a7de6, type: 3}
+  layer: 1
   mainColor: {r: 1, g: 1, b: 1, a: 1}
-  score: 0
+  value: 10
   mass: 1
   timeToLive: 3
-  scale: {x: 0.5, y: 0.5, z: 0.5}
+  scale: {x: 0.5, y: 0.5}

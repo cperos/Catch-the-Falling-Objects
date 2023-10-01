@@ -9,6 +9,9 @@ public class Loot : MonoBehaviour
     public float score;
     public string lootName;
 
+    GameObject behaviourHandler;
+
+    CircleCollider2D circleCollider;
     public void Init(LootSO loot)
     {
 
@@ -19,10 +22,19 @@ public class Loot : MonoBehaviour
 
         rigidbody2d = gameObject.AddComponent<Rigidbody2D>();
         rigidbody2d.mass = loot.mass;
-        score = loot.score;
+        score = loot.value;
         lootName = loot.name;
 
         transform.localScale = new Vector3(loot.scale.x, loot.scale.y, 1f);
+        //gameObject.tag = loot.type.ToString();
+
+        circleCollider = gameObject.AddComponent<CircleCollider2D>();
+        circleCollider.isTrigger = true;
+
+        behaviourHandler = Instantiate(loot.behaviourHandler, transform);
+
+        LootBehaviour lootBehaviour = behaviourHandler.GetComponent<LootBehaviour>();
+        lootBehaviour.Init(loot.value);
     }
 
 }

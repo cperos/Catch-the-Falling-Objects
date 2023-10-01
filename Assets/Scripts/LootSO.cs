@@ -8,12 +8,14 @@ using UnityEngine;
 public class LootSO : ScriptableObject
 {
     public string nameOfLoot;
+    public GameObject behaviourHandler;
     public Sprite sprite;
     public int layer = 0;
     public Color mainColor;
-    public float score;
+    public float value;
     public float mass;
     public float timeToLive;
 
     public Vector2 scale;
 }
+
