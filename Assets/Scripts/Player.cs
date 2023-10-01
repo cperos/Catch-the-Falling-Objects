@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
         boxCollider2D.size = playerSO.colliderSize;
 
         playerHealth = playerSO.playerHealth;
+
+        AddPoints(0); // broadcast the initial score
+        ModifyHealth(0); // broadcast initial health
     }
 
     public void AddPoints(float points)

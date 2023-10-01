@@ -12,6 +12,11 @@ public class AppManager : MonoBehaviour
     private PlayerManager playerManager;
     private GameObject playerManagerObject;
 
+    private TimerManager timerManager;
+    private GameObject timerManagerObject;
+
+    [SerializeField] private float GameTimerSeconds;
+
     public List <LevelDataSO> levelDataSOList = new List<LevelDataSO>();
 
 
@@ -20,7 +25,6 @@ public class AppManager : MonoBehaviour
 
 
     public bool gameActive;
-
     private int startingLevel;
 
 
@@ -30,17 +34,20 @@ public class AppManager : MonoBehaviour
         // Create a new game object
         levelManagerObject = new GameObject("LevelManagerObject");
         // Attach the LevelManager script to the game object
-        levelManager = (LevelManager)levelManagerObject.AddComponent<LevelManager>();
+        levelManager = levelManagerObject.AddComponent<LevelManager>();
         levelManager.Init(levelDataSOList);
         levelManager.LoadLevel(startingLevel);
 
         // Create a new game object
         playerManagerObject = new GameObject("playerManagerObject");
-        playerManager = (PlayerManager)playerManagerObject.AddComponent<PlayerManager>();
+        playerManager = playerManagerObject.AddComponent<PlayerManager>();
         playerManager.Init(playerSOList);
-        //playerManager.LoadPlayers();
 
-        //levelManager
+        // Create a new game object
+        timerManagerObject = new GameObject("timerManagerObject");
+        timerManager = timerManagerObject.AddComponent<TimerManager>();
+        timerManager.Init(GameTimerSeconds);
+        timerManager.StartTimer();
 
 
     }
