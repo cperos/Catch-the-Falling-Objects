@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class PipeSO : ScriptableObject
 {
     public Sprite sprite;
+    public int layer = 1;
     public Vector2 scale = new Vector2 (1f,1f);
     public float rotation = 0f;
 

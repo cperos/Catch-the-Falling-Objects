@@ -9,6 +9,7 @@ public class LootSO : ScriptableObject
 {
     public string nameOfLoot;
     public Sprite sprite;
+    public int layer = 0;
     public Color mainColor;
     public float score;
     public float mass;

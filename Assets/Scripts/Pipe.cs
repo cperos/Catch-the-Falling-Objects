@@ -28,6 +28,7 @@ public class Pipe : MonoBehaviour
         _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         _spriteRenderer.color = _pipeSO.mainColor;
         _spriteRenderer.sprite = _pipeSO.sprite;
+        _spriteRenderer.sortingOrder = pipeSO.layer;
         transform.localScale = new Vector3(_pipeSO.scale.x, _pipeSO.scale.y, 1f);
         transform.eulerAngles = new Vector3(0, 0, _pipeSO.rotation);
     }

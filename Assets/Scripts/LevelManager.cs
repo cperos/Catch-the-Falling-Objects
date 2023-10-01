@@ -36,7 +36,6 @@ public class LevelManager : MonoBehaviour
         _levelDataSOList = levelDataSOList;
     }
 
-
     public void LoadLevel(int levelNumberToLoad)
     {
         if (_levelDataSOList.Count > 0 && levelNumberToLoad <= _levelDataSOList.Count)

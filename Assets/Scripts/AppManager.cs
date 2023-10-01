@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class AppManager : MonoBehaviour
 {
+    //public int numberOfPlayers;
     private LevelManager levelManager;
     private GameObject levelManagerObject;
+
+    private PlayerManager playerManager;
+    private GameObject playerManagerObject;
+
     public List <LevelDataSO> levelDataSOList = new List<LevelDataSO>();
+
+
+    public List<PlayerSO> playerSOList = new List<PlayerSO>();
     //public UICanvasManager uiCanvasManager;
 
 
     public bool gameActive;
+
     private int startingLevel;
 
 
@@ -24,6 +33,14 @@ public class AppManager : MonoBehaviour
         levelManager = (LevelManager)levelManagerObject.AddComponent<LevelManager>();
         levelManager.Init(levelDataSOList);
         levelManager.LoadLevel(startingLevel);
+
+        // Create a new game object
+        playerManagerObject = new GameObject("playerManagerObject");
+        playerManager = (PlayerManager)playerManagerObject.AddComponent<PlayerManager>();
+        playerManager.Init(playerSOList);
+        //playerManager.LoadPlayers();
+
+        //levelManager
 
 
     }

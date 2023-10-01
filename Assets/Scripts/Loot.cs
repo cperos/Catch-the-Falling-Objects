@@ -15,6 +15,7 @@ public class Loot : MonoBehaviour
         spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = loot.sprite;
         spriteRenderer.color = loot.mainColor;
+        spriteRenderer.sortingOrder = loot.layer;
 
         rigidbody2d = gameObject.AddComponent<Rigidbody2D>();
         rigidbody2d.mass = loot.mass;
