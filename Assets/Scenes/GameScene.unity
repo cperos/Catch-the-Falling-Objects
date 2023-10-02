@@ -1138,6 +1138,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2251750318163188568, guid: ff38609cc3756d64789d474e50b7ae0d, type: 3}
   m_PrefabInstance: {fileID: 5421491087221429645}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1988207042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2325794748935207253, guid: f131d135ff5c06048a4a0274e9016483, type: 3}
+  m_PrefabInstance: {fileID: 4914726416078927958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2000472689 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7436924458663110867, guid: f131d135ff5c06048a4a0274e9016483, type: 3}
@@ -1509,6 +1520,7 @@ RectTransform:
   - {fileID: 25586122}
   - {fileID: 1021895245255334782}
   - {fileID: 862151663}
+  - {fileID: 2113111727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1535,12 +1547,88 @@ MonoBehaviour:
   - {fileID: 2000472689}
   - {fileID: 357249129}
   - {fileID: 2025292987826034513}
+  - {fileID: 1988207042}
   gameOverPanel: {fileID: 862151660}
   explode: {fileID: 7148347616264711944, guid: 3a4f6c1f0c90fd44383f8dfb3443bc50, type: 3}
   hpMinMax: {x: 19, y: 350}
-  timerMin: 0
+  timerMin: 20
   _score: {fileID: 228514120}
   _finalScore: {fileID: 2084429035}
+--- !u!1 &2113111726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113111727}
+  - component: {fileID: 2113111729}
+  - component: {fileID: 2113111728}
+  m_Layer: 5
+  m_Name: Floor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2113111727
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113111726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2092497280}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: 0, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2113111728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113111726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.18039216, g: 0.3019608, b: 0.48235297, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a2567019299e2654eab0794eb4857841, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2113111729
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113111726}
+  m_CullTransparentMesh: 1
 --- !u!1 &2136130660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,6 +1875,10 @@ PrefabInstance:
     - target: {fileID: 4341691014926289263, guid: f131d135ff5c06048a4a0274e9016483, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187201611591771172, guid: f131d135ff5c06048a4a0274e9016483, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
