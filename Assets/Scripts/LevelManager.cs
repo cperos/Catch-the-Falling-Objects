@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     SpawnPipeManager SpawnPipeManager;
 
+
     private List<LevelDataSO> _levelDataSOList = new List<LevelDataSO>();
 
 
@@ -21,14 +22,17 @@ public class LevelManager : MonoBehaviour
         LevelName = levelData.levelName;
         LevelDescription = levelData.levelDescription;
 
+
         // Create a new game object
         GameObject spawnPipeManagerObject = new GameObject("SpawnPipeManagerObject");
 
         // Attach the SpawnPipeManager script to the game object
-        SpawnPipeManager = (SpawnPipeManager)spawnPipeManagerObject.AddComponent<SpawnPipeManager>();
+        SpawnPipeManager = spawnPipeManagerObject.AddComponent<SpawnPipeManager>();
 
         // Spawn the Pipes
         SpawnPipeManager.Init(levelData.pipeSOs);
+
+        
     }
 
     public void Init(List<LevelDataSO> levelDataSOList)

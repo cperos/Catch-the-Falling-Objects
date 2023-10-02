@@ -21,3 +21,4 @@ MonoBehaviour:
   mass: 1
   timeToLive: 3
   scale: {x: 0.75, y: 0.75}
+  collectionSound: {fileID: 8300000, guid: f2caf5f60fe94144bb737fafeb087df7, type: 3}

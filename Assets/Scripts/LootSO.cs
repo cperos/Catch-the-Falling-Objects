@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LootSO", menuName = "ScriptableObjects/LootSO", order = 3)]
@@ -17,5 +18,7 @@ public class LootSO : ScriptableObject
     public float timeToLive;
 
     public Vector2 scale;
+
+    public AudioClip collectionSound; 
 }
 

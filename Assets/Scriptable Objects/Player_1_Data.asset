@@ -26,3 +26,5 @@ MonoBehaviour:
   colliderOffset: {x: 0, y: 0}
   colliderSize: {x: 4, y: 0.5}
   yShift: 1
+  explosionPrefab: {fileID: 8219106729573851544, guid: 7baa36ac6448c7a4f98ae610d732b6f3, type: 3}
+  deathSound: {fileID: 8300000, guid: ed5f129b1d3154947b2b400802991ed1, type: 3}

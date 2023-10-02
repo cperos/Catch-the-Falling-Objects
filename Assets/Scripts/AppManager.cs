@@ -25,8 +25,7 @@ public class AppManager : MonoBehaviour
 
     public static bool gameActive;
     private int startingLevel;
-
-
+    private AudioSource gameAudio;
 
 
     // Start is called before the first frame update
@@ -38,6 +37,11 @@ public class AppManager : MonoBehaviour
         levelManager = levelManagerObject.AddComponent<LevelManager>();
         levelManager.Init(levelDataSOList);
         levelManager.LoadLevel(startingLevel);
+
+        //game audio
+        gameAudio = gameObject.AddComponent<AudioSource>();
+        gameAudio.clip = levelDataSOList[startingLevel].music;
+        gameAudio.Play();
 
         // Create a new game object
         playerManagerObject = new GameObject("playerManagerObject");
@@ -51,6 +55,8 @@ public class AppManager : MonoBehaviour
         timerManager.StartTimer();
 
 
+
     }
+
 
 }

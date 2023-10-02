@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -19,9 +20,12 @@ public class Player : MonoBehaviour
     public delegate void ScoreModification(float score);
     public static event ScoreModification onScoreModification;
 
-
     public Vector2 screenBounds;
 
+    private GameObject explosion;
+    private AudioClip deathSound;
+
+    private AudioSource playerAudio;
 
 
     public void Init(PlayerSO playerSO)
@@ -40,6 +44,12 @@ public class Player : MonoBehaviour
 
         AddPoints(0); // broadcast the initial score
         ModifyHealth(0); // broadcast initial health
+        explosion = playerSO.explosionPrefab;
+
+        deathSound = playerSO.deathSound;
+        playerAudio = gameObject.AddComponent<AudioSource>();
+
+
 
         CalculateScreenBounds();
     }
@@ -68,7 +78,13 @@ public class Player : MonoBehaviour
 
     private void KillPLayer()
     {
-        Destroy(gameObject);
+
+        playerAudio.clip = deathSound;
+        playerAudio.Play();
+
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.enabled = false;
     }
 
 
@@ -85,6 +101,8 @@ public class Player : MonoBehaviour
 
     public void ModifyHealth(float hp)
     {
+        float originalHealth = playerHealth;
+
         playerHealth += hp;
         if (playerHealth > 100)
         {
@@ -96,12 +114,15 @@ public class Player : MonoBehaviour
             onHealthModification(playerHealth);
         }
 
+
+        if (playerHealth < originalHealth)
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
+        }
         if (playerHealth <= 0)
         {
             playerHealth = 0;
             KillPLayer();
-            
-
         }
     }
 

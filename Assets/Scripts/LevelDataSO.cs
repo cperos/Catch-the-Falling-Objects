@@ -20,5 +20,7 @@ public class LevelDataSO : ScriptableObject
 
     public Vector2 spawnRateRange; // x = min, y = max
 
+    public AudioClip music;
+
 
 }

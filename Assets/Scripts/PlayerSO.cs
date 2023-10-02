@@ -26,4 +26,7 @@ public class PlayerSO : ScriptableObject
 
     public float yShift;
 
+    public GameObject explosionPrefab;
+    public AudioClip deathSound;
+
 }

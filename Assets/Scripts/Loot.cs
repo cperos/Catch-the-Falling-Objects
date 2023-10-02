@@ -9,6 +9,8 @@ public class Loot : MonoBehaviour
     public float score;
     public string lootName;
 
+    public AudioClip collectionSound;
+
     GameObject behaviourHandler;
 
     CircleCollider2D circleCollider;
@@ -32,6 +34,8 @@ public class Loot : MonoBehaviour
         circleCollider.isTrigger = true;
 
         behaviourHandler = Instantiate(loot.behaviourHandler, transform);
+
+        collectionSound = loot.collectionSound;
 
         LootBehaviour lootBehaviour = behaviourHandler.GetComponent<LootBehaviour>();
         lootBehaviour.Init(loot.value);
