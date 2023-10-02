@@ -56,7 +56,7 @@ Catch the falling objects from a series of tubes. These objects include colorful
 
 ## 🗓️ **Project Timeline & Efficiency**
 
-Working within a limited timeframe, this project was kickstarted on a Friday noon and completed by Sunday, 9 pm. My confidence in accurately estimating task durations allowed for this swift execution, even amidst prior commitments. This highlights both my dedication and a strong acumen in time management. Feedback and insights on this project, crafted within such constraints, will be highly valued.
+Working within a limited timeframe, this project was kickstarted on a Friday noon and completed by Sunday, 9 pm. My confidence in accurately estimating task durations allowed for this swift execution.
 
 ## **🔚 Concluding Notes**
 This game provides a fun and challenging experience by integrating traditional game mechanics with a unique data-driven approach. It demonstrates proficiency in Unity development and an understanding of scalable game design.
