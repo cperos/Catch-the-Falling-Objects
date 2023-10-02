@@ -23,7 +23,7 @@ public class AppManager : MonoBehaviour
     //public UICanvasManager uiCanvasManager;
 
 
-    public bool gameActive;
+    public static bool gameActive;
     private int startingLevel;
 
 

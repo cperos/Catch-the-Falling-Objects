@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICanvasManager : MonoBehaviour
 {
     [SerializeField] private RectTransform healthBarFillTransform;
     [SerializeField] private RectTransform timerFillTransform;
+    [SerializeField] private List <Image> activeGameImages = new List<Image>();
 
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject explode;
 
     [SerializeField] private Vector2 hpMinMax;
     [SerializeField] private float timerMin;
@@ -17,11 +20,14 @@ public class UICanvasManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _score;
 
+
+
     // Timer variables
     private float _maxTime;
     private float targetWidth;
     private float currentWidth;
     private const float lerpSpeed = 1.0f;
+    private bool exploded = false;
 
 
     private void OnEnable()
@@ -86,9 +92,24 @@ public class UICanvasManager : MonoBehaviour
     private void ModifyTimer(float time)
     {
         targetWidth = Mathf.Lerp(timerMin, timerY, time / _maxTime);
-        if (time <= 0)
+        if (time < 0)
         {
             gameOverPanel.SetActive(true);
+
+            if (!exploded)
+            {
+                Instantiate(explode, timerFillTransform.parent);
+                
+                foreach(Image image in activeGameImages)
+                {
+                    image.enabled = false;
+                }
+                
+                exploded = true;
+
+            }
+            
+            
         }
     }
 

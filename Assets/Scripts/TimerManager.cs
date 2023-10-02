@@ -12,7 +12,6 @@ public class TimerManager : MonoBehaviour
 
     public delegate void TimerEvent(float time);
     public static event TimerEvent onTimerTick;  // broadcast every tick
-
     public static event TimerEvent onTimerStart; // broadcast max time at start
 
     public void Init(float time)

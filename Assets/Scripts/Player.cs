@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public delegate void ScoreModification(float score);
     public static event ScoreModification onScoreModification;
 
+
     public Vector2 screenBounds;
 
 
@@ -42,6 +43,35 @@ public class Player : MonoBehaviour
 
         CalculateScreenBounds();
     }
+
+    private void OnEnable()
+    {
+
+        TimerManager.onTimerTick += CheckTime;
+
+    }
+
+    private void OnDisable()
+    {
+
+        TimerManager.onTimerTick -= CheckTime;
+
+    }
+
+    private void CheckTime(float time)
+    {
+        if (time < 0)
+        {
+            KillPLayer();
+        }
+    }
+
+    private void KillPLayer()
+    {
+        Destroy(gameObject);
+    }
+
+
 
     public void AddPoints(float points)
     {
@@ -69,8 +99,8 @@ public class Player : MonoBehaviour
         if (playerHealth <= 0)
         {
             playerHealth = 0;
-            //TODO GameOver
-            Destroy(gameObject);
+            KillPLayer();
+            
 
         }
     }
