@@ -5,6 +5,9 @@
 ## **🌟 Introduction**
 Catch the falling objects from a series of tubes. These objects include colorful gems, coins, and other valuables. However, you must steer clear of the bombs. Using a data-driven approach, this game is scalable and easy to modify. The AppManager initiates the game and spawns a LevelManager, Player Manager, and Timer Manager upon start.
 
+## ▶️ **Play Now!**
+Experience "Catch the Falling Objects" in your browser. Click [here](https://cperos-xr.github.io/Catch-the-Falling-Objects/) to play.
+
 ## **🕹️ How to Play**
 1. **Objective:** Catch falling objects from the tubes at the top of the screen using a cart positioned at the bottom.
 2. **Controls:** Use left and right arrow keys (or 'a' and 'd' keys in the WASD setup) to move the cart.
