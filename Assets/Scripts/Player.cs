@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player has died!!!", gameObject);
 
-
             secondaryAudio.Play();
 
             Instantiate(explosion, transform.position, Quaternion.identity);

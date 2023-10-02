@@ -26,10 +26,10 @@ MonoBehaviour:
   velocity: 1
   lootDrop:
   - lootObject: {fileID: 11400000, guid: 805e5e66b2753354184508eb107fa700, type: 2}
-    probability: 0.2
+    probability: 0.4
   - lootObject: {fileID: 11400000, guid: 23a155ae22fb85845a7cb62f3b80239e, type: 2}
-    probability: 0.2
+    probability: 0.3
   - lootObject: {fileID: 11400000, guid: c5be6c22a8fb58b40acf078e3d19fb68, type: 2}
-    probability: 0.1
+    probability: 0.2
   - lootObject: {fileID: 11400000, guid: e4832b84f1eb4f043bab13b6cb42eb7b, type: 2}
-    probability: 0.5
+    probability: 0.1

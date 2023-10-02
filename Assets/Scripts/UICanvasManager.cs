@@ -19,6 +19,7 @@ public class UICanvasManager : MonoBehaviour
     private float timerY; 
 
     [SerializeField] private TextMeshProUGUI _score;
+    [SerializeField] private TextMeshProUGUI _finalScore;
 
 
 
@@ -75,6 +76,7 @@ public class UICanvasManager : MonoBehaviour
 
         if (percentFill <= 0)
         {
+            _finalScore.text = $"Final Score \n {_score.text}";
             gameOverPanel.SetActive(true);
         }
     }
@@ -94,8 +96,10 @@ public class UICanvasManager : MonoBehaviour
         targetWidth = Mathf.Lerp(timerMin, timerY, time / _maxTime);
         if (time < 0)
         {
+            _finalScore.text = $"Final Score \n {_score.text}";
             gameOverPanel.SetActive(true);
 
+            
             if (!exploded)
             {
                 Instantiate(explode, timerFillTransform.parent);
