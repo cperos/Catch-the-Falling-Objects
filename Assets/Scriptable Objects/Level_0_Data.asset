@@ -23,5 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 551a1c75c5f5ec34daecccfa2e0879d3, type: 2}
   - {fileID: 11400000, guid: 9cc412e0a69529948ae91d5e27fe4b48, type: 2}
   spawnRateRange: {x: 1, y: 3}
-  music: {fileID: 8300000, guid: 47f94d27be3d4694582fee7d2a75604a, type: 3}
-  gameOverMusic: {fileID: 8300000, guid: ed5f129b1d3154947b2b400802991ed1, type: 3}
+  music: {fileID: 8300000, guid: c5fdac5ea96370a4e803c59e582c565a, type: 3}
