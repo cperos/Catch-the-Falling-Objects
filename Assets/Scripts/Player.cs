@@ -23,9 +23,11 @@ public class Player : MonoBehaviour
     public Vector2 screenBounds;
 
     private GameObject explosion;
-    private AudioClip deathSound;
 
     private AudioSource playerAudio;
+    private AudioSource secondaryAudio;
+
+    private bool isPlayerDead = false;
 
 
     public void Init(PlayerSO playerSO)
@@ -46,9 +48,10 @@ public class Player : MonoBehaviour
         ModifyHealth(0); // broadcast initial health
         explosion = playerSO.explosionPrefab;
 
-        deathSound = playerSO.deathSound;
-        playerAudio = gameObject.AddComponent<AudioSource>();
 
+        playerAudio = gameObject.AddComponent<AudioSource>();
+        secondaryAudio = gameObject.AddComponent<AudioSource>();
+        secondaryAudio.clip = playerSO.deathSound;
 
 
         CalculateScreenBounds();
@@ -78,13 +81,22 @@ public class Player : MonoBehaviour
 
     private void KillPLayer()
     {
+        if (!isPlayerDead)
+        {
+            Debug.Log("Player has died!!!", gameObject);
 
-        playerAudio.clip = deathSound;
-        playerAudio.Play();
 
-        Instantiate(explosion, transform.position, Quaternion.identity);
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        sr.enabled = false;
+            secondaryAudio.Play();
+
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            sr.enabled = false;
+            boxCollider2D.enabled = false;
+            
+            isPlayerDead = true;
+
+        }
+
     }
 
 
@@ -132,6 +144,10 @@ public class Player : MonoBehaviour
         GameObject go = collision.gameObject;
         LootBehaviour lb = go.GetComponentInChildren<LootBehaviour>();
         lb.Execute(this);
+
+        Loot lootScript = go.GetComponent<Loot>();
+        playerAudio.clip = lootScript.collectionSound;
+        playerAudio.Play();
 
         Destroy(go);
     }

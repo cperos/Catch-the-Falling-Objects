@@ -41,6 +41,7 @@ public class AppManager : MonoBehaviour
         //game audio
         gameAudio = gameObject.AddComponent<AudioSource>();
         gameAudio.clip = levelDataSOList[startingLevel].music;
+        gameAudio.volume = 0.5f;
         gameAudio.Play();
 
         // Create a new game object
