@@ -24,7 +24,6 @@ public class PlayerSO : ScriptableObject
     public Vector2 colliderOffset;
     public Vector2 colliderSize;
 
-
     public float yShift;
 
 }

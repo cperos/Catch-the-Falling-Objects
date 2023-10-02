@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1.0f;
-    Rigidbody2D rb2d;
-    BoxCollider2D boxCollider2D;
+    public float speed = 1.0f;
+    public Rigidbody2D rb2d;
+    private BoxCollider2D boxCollider2D;
 
     public float playerScore;
     public float playerHealth;
@@ -17,9 +19,13 @@ public class Player : MonoBehaviour
     public delegate void ScoreModification(float score);
     public static event ScoreModification onScoreModification;
 
+    public Vector2 screenBounds;
+
+
+
     public void Init(PlayerSO playerSO)
     {
-        _speed = playerSO.speed;
+        speed = playerSO.speed;
         rb2d = gameObject.AddComponent<Rigidbody2D>();
         rb2d.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb2d.drag = playerSO.drag;
@@ -33,6 +39,8 @@ public class Player : MonoBehaviour
 
         AddPoints(0); // broadcast the initial score
         ModifyHealth(0); // broadcast initial health
+
+        CalculateScreenBounds();
     }
 
     public void AddPoints(float points)
@@ -76,12 +84,48 @@ public class Player : MonoBehaviour
 
         Destroy(go);
     }
-    //Vector3 position = new Vector3 (0, 0, 0);
+
     // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal"); // the horizontal axis (arrow, a,d, joystick ets...)
-        Vector2 moveForce = new Vector2(horizontalInput * _speed, 0);
+        Vector2 moveForce = new Vector2(horizontalInput * speed, 0);
         rb2d.AddForce(moveForce);
+
+        wrapScreen();
+        
+
+    }
+
+    private void wrapScreen()
+    {
+        float shift = 1.25f;
+
+        if (transform.position.x < screenBounds.x - shift)
+        {
+            Debug.Log("Offscreen low");
+            Vector3 v3 = new Vector3(screenBounds.y, transform.position.y, transform.position.z);
+            transform.position = v3;
+        }
+        
+        if (transform.position.x > screenBounds.y + shift)
+        {
+            Debug.Log("Offscreen high");
+            Vector3 v3 = new Vector3(screenBounds.x, transform.position.y, transform.position.z);
+            transform.position = v3;
+        }
+    }
+    
+
+
+    private void CalculateScreenBounds()
+    {
+        Camera mainCamera = Camera.main;
+
+        // Get the left bound
+        screenBounds.x = mainCamera.ScreenToWorldPoint(new Vector3(0, Screen.height, mainCamera.nearClipPlane)).x;
+
+        // Get the right bound
+        screenBounds.y = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.nearClipPlane)).x;
     }
 }

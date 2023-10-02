@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AppManager : MonoBehaviour
 {
-    //public int numberOfPlayers;
     private LevelManager levelManager;
     private GameObject levelManagerObject;
 
@@ -26,6 +25,8 @@ public class AppManager : MonoBehaviour
 
     public bool gameActive;
     private int startingLevel;
+
+
 
 
     // Start is called before the first frame update
@@ -51,4 +52,5 @@ public class AppManager : MonoBehaviour
 
 
     }
+
 }

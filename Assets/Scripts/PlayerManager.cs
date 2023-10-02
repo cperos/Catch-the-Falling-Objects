@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         _playerSOs = playerSOs;
+
         CreateAllPlayers();
         InitializePlayerSpawnRange();
         DistributePlayerObjects();
@@ -33,8 +34,10 @@ public class PlayerManager : MonoBehaviour
         GameObject playerObject = new GameObject(playerSO.nameOfPlayer);
 
 
-        Player playerMovement = (Player)playerObject.AddComponent<Player>();
-        playerMovement.Init(playerSO);
+        Player player = playerObject.AddComponent<Player>();
+
+
+        player.Init(playerSO);
 
         SpriteRenderer spriteRenderer = (SpriteRenderer)playerObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = playerSO.sprite;
@@ -89,4 +92,5 @@ public class PlayerManager : MonoBehaviour
         _bottomLeftWorldPos.x += xShiftAmount;
         _bottomRightWorldPos.x -= xShiftAmount;
     }
+
 }

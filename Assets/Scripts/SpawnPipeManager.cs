@@ -9,12 +9,12 @@ public class SpawnPipeManager : MonoBehaviour
 
     private List<GameObject> _spawnPipes = new List<GameObject>();
 
-    private Vector3 _topLeftScreenPos;
-    private Vector3 _topLeftWorldPos;
+    [SerializeField] private Vector3 _topLeftScreenPos;
+    [SerializeField] private Vector3 _topLeftWorldPos;
 
     // Get the top right corner
-    private Vector3 _topRightScreenPos;
-    private Vector3 _topRightWorldPos;
+    [SerializeField] private Vector3 _topRightScreenPos;
+    [SerializeField] private Vector3 _topRightWorldPos;
 
 
     private void DistributePipeObjects()

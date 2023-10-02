@@ -15,7 +15,6 @@ public class TimerManager : MonoBehaviour
 
     public static event TimerEvent onTimerStart; // broadcast max time at start
 
-
     public void Init(float time)
     {
         _maxTime = time;

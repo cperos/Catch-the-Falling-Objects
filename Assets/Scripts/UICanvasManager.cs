@@ -8,20 +8,14 @@ public class UICanvasManager : MonoBehaviour
     [SerializeField] private RectTransform healthBarFillTransform;
     [SerializeField] private RectTransform timerFillTransform;
 
-    [SerializeField] private float hpX;
-    [SerializeField] private float timerX;
+    [SerializeField] private GameObject gameOverPanel;
 
-    private float hpY;
-    [SerializeField] private float timerY; 
+    [SerializeField] private Vector2 hpMinMax;
+    [SerializeField] private float timerMin;
+
+    private float timerY; 
 
     [SerializeField] private TextMeshProUGUI _score;
-
-
-
-    public float testValue;
-    public bool test;
-
-
 
     // Timer variables
     private float _maxTime;
@@ -29,14 +23,6 @@ public class UICanvasManager : MonoBehaviour
     private float currentWidth;
     private const float lerpSpeed = 1.0f;
 
-    //private void Update()
-    //{
-    //    if(test)
-    //    {
-    //        test = false;
-    //        ModifyHealthBarFill(testValue);
-    //    }
-    //}
 
     private void OnEnable()
     {
@@ -60,7 +46,7 @@ public class UICanvasManager : MonoBehaviour
 
     private void Start()
     {
-        hpY = healthBarFillTransform.sizeDelta.x;
+        gameOverPanel.SetActive(false);
         timerY = timerFillTransform.sizeDelta.x;
 
         currentWidth = timerFillTransform.sizeDelta.x;
@@ -73,14 +59,18 @@ public class UICanvasManager : MonoBehaviour
     {
         // Lerp the current width towards the target width
         currentWidth = Mathf.Lerp(currentWidth, targetWidth, lerpSpeed * Time.deltaTime);
-
         timerFillTransform.sizeDelta = new Vector2(currentWidth, timerFillTransform.sizeDelta.y);
     }
 
     public void ModifyHealthBarFill(float percentFill)
     {
-        float mappedValue = Mathf.Lerp( hpX, hpY, percentFill / 100f );
+        float mappedValue = Mathf.Lerp( hpMinMax.x, hpMinMax.y, percentFill / 100f );
         healthBarFillTransform.sizeDelta = new Vector2(mappedValue, healthBarFillTransform.sizeDelta.y);
+
+        if (percentFill <= 0)
+        {
+            gameOverPanel.SetActive(true);
+        }
     }
 
     public void ModifyScore(float score)
@@ -95,10 +85,11 @@ public class UICanvasManager : MonoBehaviour
 
     private void ModifyTimer(float time)
     {
-        Debug.Log("time is " + time);
-        targetWidth = Mathf.Lerp(timerX, timerY, time / _maxTime);
-
-        //timerFillTransform.sizeDelta = new Vector2(mappedValue, timerFillTransform.sizeDelta.y);
+        targetWidth = Mathf.Lerp(timerMin, timerY, time / _maxTime);
+        if (time <= 0)
+        {
+            gameOverPanel.SetActive(true);
+        }
     }
 
 }
